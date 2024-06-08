@@ -44,8 +44,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
 
-
-
   constructor(private activatedRoute: ActivatedRoute, private productService: GetProductsService) {
 
   }
@@ -89,7 +87,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
-
+    this.subscriptionOrder?.unsubscribe();
   }
 
 
