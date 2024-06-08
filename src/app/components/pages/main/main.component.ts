@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from "rxjs";
+import {Modal} from "bootstrap";
 
 declare var $: any;
 
@@ -8,38 +9,34 @@ declare var $: any;
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
-  readonly popup: HTMLElement | null;
-  private observable: Observable<string>
+  private modal!: Modal;
+  private observable!: Observable<string>
+  private subscription: Subscription | null = null;
 
-  constructor() {
-    this.popup = document.getElementById('popup');
+  ngOnInit(): void {
+    this.modal = new Modal('#popup');
 
     this.observable = new Observable((observer) => {
       setTimeout(() => {
         observer.next('open');
-      }, 10000);
+      }, 1000);
     })
-  }
 
-  ngOnInit(): void {
     $("#accordion").accordion({
       active: false, collapsible: true
     });
 
-    $('#action').click(function () {
-      $("#action::after").css  ({
-        transform: 'rotate(180deg)'
-      });
-    });
-
-    this.observable.subscribe((param) => {
+    this.subscription = this.observable.subscribe((param) => {
       console.log(param);
-      this.popup?.classList.remove('d-none');
-      this.popup?.classList.add('d-block');
+      this.modal.show();
     })
   }
 
+  ngOnDestroy() {
+    this.modal.hide();
+    this.subscription?.unsubscribe();
+  }
 
 }

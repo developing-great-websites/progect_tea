@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'catalog/:id', component: ProductComponent },
-  { path: 'order/:id', component: OrderComponent },
+  { path: 'order/:title', component: OrderComponent },
 
 ];
 

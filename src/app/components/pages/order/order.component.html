@@ -1,4 +1,4 @@
-<section class="order m-auto">
+<section class="order m-auto" *ngIf="!visibleForm">
   <div class="container">
     <h2 class="mb-5 text-center mt-5">Сделать заказ</h2>
     <div class="row g-3">
@@ -27,7 +27,7 @@
           <div class="col-12 col-md-4">
             <label for="inputLastName" [class]="{'text-danger': lastName?.invalid && (lastName?.dirty || lastName?.touched)}" class="form-label">Фамилия</label>
             <input type="text" class="form-control"
-                   formControlName ="lastName"
+                   formControlName ="last_name"
                    [class]="{'border-danger': lastName?.invalid && (lastName?.dirty || lastName?.touched)}"
                    id="inputLastName">
             <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
@@ -87,12 +87,16 @@
         <div class="row">
           <div class="col-md-4">
             <button class="btn btn-primary" id="btnSend" (click)="saveOrder()">Отправить</button>
+            <div>
+              <div class="text-danger" *ngIf="!visibleText">Произошла ошибка. Попробуйте еще раз.</div>
+            </div>
           </div>
         </div>
       </form>
-      <div class="thanks-for-order" id="order-success">
-        Спасибо за заказ. Мы свяжемся с вами в ближайшее время!
-      </div>
+
     </div>
   </div>
 </section>
+<div class="text-center fs-3" *ngIf="!visibleTextSuccess">
+  Спасибо за заказ!
+</div>
