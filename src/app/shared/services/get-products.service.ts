@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {ProductType} from "../types/product.type";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ProductType} from "../../../types/product.type";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class GetProductsService {
   }
 
   getProducts(): Observable<ProductType[]> {
-    return this.http.get<ProductType[]>('https://testologia.ru/tea');
+    return this.http.get<ProductType[]>(environment.apiUrl + 'tea');
   }
 
   getProduct(id: number): Observable<ProductType> {
-    return this.http.get<ProductType>(`https://testologia.ru/tea?id=${id}`);
+    return this.http.get<ProductType>(environment.apiUrl + `tea?id=${id}`);
   }
 
   createOrder(data:
@@ -33,7 +34,7 @@ export class GetProductsService {
                   address: string,
                   comment: string,
                 }) {
-    return this.http.post<{ success: number, message?: string }>(`https://testologia.ru/order-tea`, data);
+    return this.http.post<{ success: number, message?: string }>(environment.apiUrl + `order-tea`, data);
   }
 
 }

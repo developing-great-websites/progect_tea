@@ -1,37 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/common/header/header.component';
-import { FooterComponent } from './components/common/footer/footer.component';
-import { MainComponent } from './components/pages/main/main.component';
-import { CatalogComponent } from './components/pages/catalog/catalog.component';
 import {HttpClientModule} from "@angular/common/http";
-import { LimitSymbolsPipe } from './pipes/limit-symbols.pipe';
-import { ProductComponent } from './components/pages/product/product.component';
-import {GetProductsService} from "./services/get-products.service";
-import { OrderComponent } from './components/pages/order/order.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ProductsModule} from "./feature/products/products.module";
+import {MainModule} from "./feature/main/main.module";
+import {SharedModule} from "./shared/shared.module";
+import {GetProductsService} from "./shared/services/get-products.service";
+import { OrderModule } from './feature/order/order.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent,
-    CatalogComponent,
-    LimitSymbolsPipe,
-    ProductComponent,
-    OrderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    NgbModule,
+    ProductsModule,
+    MainModule,
+    OrderModule,
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [GetProductsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+}

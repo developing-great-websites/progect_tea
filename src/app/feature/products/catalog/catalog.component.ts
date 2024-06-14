@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductType} from "../../../types/product.type";
-import {GetProductsService} from "../../../services/get-products.service";
+import {ProductType} from "../../../../types/product.type";
+import {GetProductsService} from "../../../shared/services/get-products.service";
+
 
 @Component({
   selector: 'catalog',
